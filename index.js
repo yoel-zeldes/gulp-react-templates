@@ -1,18 +1,14 @@
 var through = require("through2"),
 	gutil = require("gulp-util"),
+	fs = require("fs")
 	reactTemplates = require("react-templates");
 
 module.exports = function (param) {
 	"use strict";
 
-	if (!param) {
-		throw new gutil.PluginError("gulp-react-templates", "No param supplied");
-	}
-
 	function reactTemplatesPipe(file, enc, callback) {
 		/*jshint validthis:true*/
 
-		// Do nothing if no contents
 		if (file.isNull()) {
 			this.push(file);
 			return callback();
@@ -24,17 +20,17 @@ module.exports = function (param) {
 			return callback();
 		}
 
-		// check if file.contents is a `Buffer`
 		if (file.isBuffer()) {
-			var conf = {
-				_: [file.path]
-			};
-			var ret = reactTemplates.executeOptions(conf);
+			param = param || {};
+			param._ = [file.path];
+			var ret = reactTemplates.executeOptions(param);
 			if (ret) {
 				this.emit("error",
 					new gutil.PluginError("gulp-react-templates", "rt " + file.path + " failed"));
 			}
-			file.contents = new Buffer(String(file.contents) + "\n" + param);
+
+			file.contents = new Buffer(fs.readFileSync(file.path + ".js"));
+			file.path = file.path + '.js';
 
 			this.push(file);
 		}

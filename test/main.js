@@ -30,7 +30,7 @@ describe("gulp-react-templates", function () {
 			contents: fs.readFileSync("test/fixtures/hello.rt")
 		});
 
-		var stream = reactTemplates("World");
+		var stream = reactTemplates();
 
 		stream.on("error", function(err) {
 			should.exist(err);
@@ -38,7 +38,6 @@ describe("gulp-react-templates", function () {
 		});
 
 		stream.on("data", function (newFile) {
-
 			should.exist(newFile);
 			should.exist(newFile.contents);
 
@@ -68,7 +67,7 @@ describe("gulp-react-templates", function () {
 			contents: fs.createReadStream("test/fixtures/hello.rt")
 		});
 
-		var stream = reactTemplates("World");
+		var stream = reactTemplates();
 
 		stream.on("error", function(err) {
 			should.exist(err);
@@ -85,37 +84,4 @@ describe("gulp-react-templates", function () {
 		stream.end();
 	});
 
-	/*
-	it("should produce expected file via stream", function (done) {
-
-		var srcFile = new gutil.File({
-			path: "test/fixtures/hello.rt",
-			cwd: "test/",
-			base: "test/fixtures",
-			contents: fs.createReadStream("test/fixtures/hello.rt")
-		});
-
-		var stream = reactTemplates("World");
-
-		stream.on("error", function(err) {
-			should.exist(err);
-			done();
-		});
-
-		stream.on("data", function (newFile) {
-
-			should.exist(newFile);
-			should.exist(newFile.contents);
-
-			newFile.contents.pipe(es.wait(function(err, data) {
-				should.not.exist(err);
-				data.should.equal(String(expectedFile.contents));
-				done();
-			}));
-		});
-
-		stream.write(srcFile);
-		stream.end();
-	});
-	*/
 });
