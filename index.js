@@ -1,5 +1,6 @@
 var through = require("through2"),
-	gutil = require("gulp-util");
+	gutil = require("gulp-util"),
+	reactTemplates = require("react-templates");
 
 module.exports = function (param) {
 	"use strict";
