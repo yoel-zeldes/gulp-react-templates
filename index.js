@@ -9,7 +9,7 @@ module.exports = function (param) {
 		throw new gutil.PluginError("gulp-react-templates", "No param supplied");
 	}
 
-	function reactTemplates(file, enc, callback) {
+	function reactTemplatesPipe(file, enc, callback) {
 		/*jshint validthis:true*/
 
 		// Do nothing if no contents
@@ -26,6 +26,14 @@ module.exports = function (param) {
 
 		// check if file.contents is a `Buffer`
 		if (file.isBuffer()) {
+			var conf = {
+				_: [file.path]
+			};
+			var ret = reactTemplates.executeOptions(conf);
+			if (ret) {
+				this.emit("error",
+					new gutil.PluginError("gulp-react-templates", "rt " + file.path + " failed"));
+			}
 			file.contents = new Buffer(String(file.contents) + "\n" + param);
 
 			this.push(file);
@@ -33,5 +41,5 @@ module.exports = function (param) {
 		return callback();
 	}
 
-	return through.obj(reactTemplates);
+	return through.obj(reactTemplatesPipe);
 };

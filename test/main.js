@@ -15,19 +15,19 @@ var gutil = require("gulp-util"),
 describe("gulp-react-templates", function () {
 
 	var expectedFile = new gutil.File({
-		path: "test/expected/hello.txt",
+		path: "test/expected/hello.rt.js",
 		cwd: "test/",
 		base: "test/expected",
-		contents: fs.readFileSync("test/expected/hello.txt")
+		contents: fs.readFileSync("test/expected/hello.rt.js")
 	});
 
 	it("should produce expected file via buffer", function (done) {
 
 		var srcFile = new gutil.File({
-			path: "test/fixtures/hello.txt",
+			path: "test/fixtures/hello.rt",
 			cwd: "test/",
 			base: "test/fixtures",
-			contents: fs.readFileSync("test/fixtures/hello.txt")
+			contents: fs.readFileSync("test/fixtures/hello.rt")
 		});
 
 		var stream = reactTemplates("World");
@@ -42,7 +42,16 @@ describe("gulp-react-templates", function () {
 			should.exist(newFile);
 			should.exist(newFile.contents);
 
-			String(newFile.contents).should.equal(String(expectedFile.contents));
+			var newContents = newFile.contents.toString();
+			var expectedContents = expectedFile.contents.toString();
+
+			if (expectedContents.length === newContents.length + 1 &&
+				expectedContents[expectedContents.length - 1] === '\n') {
+				// My IDE adds a blank line at the end of the file...
+				expectedContents = expectedContents.substr(0, expectedContents.length - 1);
+			}
+
+			newContents.should.equal(expectedContents);
 			done();
 		});
 
@@ -53,10 +62,10 @@ describe("gulp-react-templates", function () {
 	it("should error on stream", function (done) {
 
 		var srcFile = new gutil.File({
-			path: "test/fixtures/hello.txt",
+			path: "test/fixtures/hello.rt",
 			cwd: "test/",
 			base: "test/fixtures",
-			contents: fs.createReadStream("test/fixtures/hello.txt")
+			contents: fs.createReadStream("test/fixtures/hello.rt")
 		});
 
 		var stream = reactTemplates("World");
@@ -80,10 +89,10 @@ describe("gulp-react-templates", function () {
 	it("should produce expected file via stream", function (done) {
 
 		var srcFile = new gutil.File({
-			path: "test/fixtures/hello.txt",
+			path: "test/fixtures/hello.rt",
 			cwd: "test/",
 			base: "test/fixtures",
-			contents: fs.createReadStream("test/fixtures/hello.txt")
+			contents: fs.createReadStream("test/fixtures/hello.rt")
 		});
 
 		var stream = reactTemplates("World");
