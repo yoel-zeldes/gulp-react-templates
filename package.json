@@ -1,9 +1,16 @@
 {
   "name": "gulp-react-templates",
-  "version": "0.0.0",
-  "description": "A plugin for Gulp",
+  "version": "0.0.4",
+  "description": "Gulp plugin for react-templates - Light weight templates for react -> write html get valid react code",
   "keywords": [
-    "gulpplugin"
+    "gulpplugin",
+    "templates",
+    "react-templates",
+    "react",
+    "reactjs",
+    "react.js",
+    "react-component",
+    "react component"
   ],
   "author": {
     "name": "Yoel Zeldes",
@@ -12,8 +19,7 @@
   },
   "repository": "yoel-zeldes/gulp-react-templates",
   "scripts": {
-    "test": "istanbul test _mocha --report html -- test/*.js --reporter spec",
-    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "test": "istanbul test _mocha --report html -- test/*.js --reporter spec"
   },
   "dependencies": {
     "gulp-util": "~2.2.0",

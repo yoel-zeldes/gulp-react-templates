@@ -1,9 +1,7 @@
-(PLUGIN AUTHOR: Please read [Plugin README conventions](https://github.com/wearefractal/gulp/wiki/Plugin-README-Conventions), then delete this line)
-
 # gulp-react-templates
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url]
+[![NPM version][npm-image]][npm-url]
 
-> react-templates plugin for [gulp](https://github.com/wearefractal/gulp)
+> [react-templates](http://wix.github.io/react-templates) plugin for [gulp](https://github.com/wearefractal/gulp)
 
 ## Usage
 
@@ -18,9 +16,9 @@ Then, add it to your `gulpfile.js`:
 ```javascript
 var react-templates = require("gulp-react-templates");
 
-gulp.src("./src/*.ext")
+gulp.src("./src/*.rt")
 	.pipe(react-templates({
-		msg: "Hello Gulp!"
+		modules: 'amd'
 	}))
 	.pipe(gulp.dest("./dist"));
 ```
@@ -28,12 +26,7 @@ gulp.src("./src/*.ext")
 ## API
 
 ### react-templates(options)
-
-#### options.msg
-Type: `String`  
-Default: `Hello World`
-
-The message you wish to attach to file.
+The options `gulp-react-templates` can get are the same as `react-templates`'s options. Just type `rt --help` in your shell in order to learn about the available options.
 
 
 ## License
@@ -42,12 +35,3 @@ The message you wish to attach to file.
 
 [npm-url]: https://npmjs.org/package/gulp-react-templates
 [npm-image]: https://badge.fury.io/js/gulp-react-templates.png
-
-[travis-url]: http://travis-ci.org/yoel-zeldes/gulp-react-templates
-[travis-image]: https://secure.travis-ci.org/yoel-zeldes/gulp-react-templates.png?branch=master
-
-[coveralls-url]: https://coveralls.io/r/yoel-zeldes/gulp-react-templates
-[coveralls-image]: https://coveralls.io/repos/yoel-zeldes/gulp-react-templates/badge.png
-
-[depstat-url]: https://david-dm.org/yoel-zeldes/gulp-react-templates
-[depstat-image]: https://david-dm.org/yoel-zeldes/gulp-react-templates.png
