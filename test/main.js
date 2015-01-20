@@ -30,7 +30,7 @@ describe("gulp-react-templates", function () {
 			contents: fs.readFileSync("test/fixtures/hello.rt")
 		});
 
-		var stream = reactTemplates();
+		var stream = reactTemplates({force: true, modules: 'amd'});
 
 		stream.on("error", function(err) {
 			should.exist(err);
@@ -67,7 +67,7 @@ describe("gulp-react-templates", function () {
 			contents: fs.createReadStream("test/fixtures/hello.rt")
 		});
 
-		var stream = reactTemplates();
+		var stream = reactTemplates({force: true, modules: 'amd'});
 
 		stream.on("error", function(err) {
 			should.exist(err);
